@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) try
 
                 // Record per-frame metadata for UVC streams
                 std::stringstream csv_file;
-                csv_file << "rs-save-to-disk-output-" << vf.get_profile().stream_name()
+                csv_file << "output-" << vf.get_profile().stream_name() << frame_index
                     << "-metadata.csv";
                 metadata_to_csv(vf, csv_file.str());
             }

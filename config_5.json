@@ -1,0 +1,40 @@
+{
+    "model" : {
+        "min_input_size":       288,
+        "max_input_size":       448,
+        "anchors":              [55,69, 75,234, 133,240, 136,129, 142,363, 203,290, 228,184, 285,359, 341,260],
+        "labels":               ["fish"]
+    },
+
+    "train": {
+        "train_image_folder":   "../train_x/",
+        "train_annot_folder":  "../train_y/",
+        "cache_name":           "fish_train_wells_5.pkl",
+
+        "train_times":          1,
+        "batch_size":           12,
+        "learning_rate":        1e-4,
+        "nb_epochs":            20,
+        "warmup_epochs":        1,
+        "ignore_thresh":        0.5,
+        "gpus":                 "0,1",
+
+        "grid_scales":          [1,1,1],
+        "obj_scale":            5,
+        "noobj_scale":          1,
+        "xywh_scale":           1,
+        "class_scale":          1,
+
+        "tensorboard_dir":      "logs",
+        "saved_weights_name":   "fish_wx_v5_all_data.h5",
+        "debug":                false
+    },
+
+    "valid": {
+        "valid_image_folder":   "../test/",
+        "valid_annot_folder":   "../test_labels/",
+        "cache_name":           "fish_test_3.pkl",
+
+        "valid_times":          1
+    }
+}

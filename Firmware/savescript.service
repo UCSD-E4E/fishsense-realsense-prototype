@@ -1,0 +1,12 @@
+[Unit]
+Description=Rudimentary Saving Script for RealSense
+After=multi-user.target
+
+[Service]
+Type=idle
+User=pi
+ExecStartPre=/bin/sleep 1
+ExecStart=/home/pi/rs-save-to-disk
+
+[Install]
+WantedBy=multi-user.target

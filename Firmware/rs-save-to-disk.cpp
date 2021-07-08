@@ -104,14 +104,14 @@ int main(int argc, char* argv[]) try
                 for (auto i = 0; i < 30; ++i) pipe.wait_for_frames();
             }
             
-            bool colorFlag = false;
-            bool depthFlag = false;
-            rs2::frame depthvf, colorvf;
+            //bool colorFlag = false;
+            //bool depthFlag = false;
+            //rs2::frame depthvf, colorvf;
             
             // Wait for the next set of frames from the camera. Now that autoexposure, etc.
             // has settled, we will write these to disk
             while(rec_flag) {
-                for (auto&& frame : pipe.wait_for_frames())
+                /*for (auto&& frame : pipe.wait_for_frames())
                 {
                     // We can only save video frames as pngs, so we skip the rest
                     if (auto vf = frame.as<rs2::video_frame>())
@@ -159,12 +159,42 @@ int main(int argc, char* argv[]) try
                         }
                         
                         // Record per-frame metadata for UVC streams
-                        /*std::stringstream csv_file;
-                         csv_file << "output-" << vf.get_profile().stream_name() << frame_index
-                         << "-metadata.csv";
-                         metadata_to_csv(vf, csv_file.str());*/
+                        //std::stringstream csv_file;
+                        // csv_file << "output-" << vf.get_profile().stream_name() << frame_index
+                        // << "-metadata.csv";
+                        // metadata_to_csv(vf, csv_file.str());
                     }
+                }*/
+                
+                rs2::frameset frameset = pipe.wait_for_frames();
+                rs2::video_frame color = frameset.get_color_frame();
+                rs2::depth_frame depth = frameset.get_depth_frame();
+                if(!color || !depth) {
+                    continue;
                 }
+                std::stringstream png_file;
+                png_file << dirprefix.str() << "img-" << color.get_profile().stream_name() << frame_index << ".png";
+                stbi_write_png(png_file.str().c_str(), color.get_width(), color.get_height(),
+                                color.get_bytes_per_pixel(), color.get_data(), color.get_stride_in_bytes());
+                std::cout << "Saved " << png_file.str() << std::endl;
+                
+                std::stringstream depthname;
+                depthname << dirprefix.str() << "img-" << depth.get_profile().stream_name() << frame_index << ".csv";
+                std::ofstream fs(depthname.str(),std::ios::trunc);
+                if(fs) {
+                    for(int y=0;y<depth.get_height();y++) {
+                        auto delim = "";
+                        
+                        for(int x=0;x<depth.get_width();x++) {
+                            fs << delim << depth.get_distance(x,y);
+                            delim = ",";
+                        }
+                        fs << '\n';
+                    }
+                    fs.flush();
+                }
+                frame_index++;
+                
                 if(digitalRead(REC_REED)==0) {
                     digitalWrite(REC_LED,0);
                     rec_flag=false;

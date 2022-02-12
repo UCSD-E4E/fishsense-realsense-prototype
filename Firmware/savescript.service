@@ -1,12 +1,12 @@
 [Unit]
-Description=Rudimentary Saving Script for RealSense
+Description=TX2 saving script for RealSense
 After=multi-user.target
 
 [Service]
 Type=idle
-User=pi
-ExecStartPre=/bin/sleep 1
-ExecStart=/home/pi/rs-save-to-disk
+User=root
+ExecStartPre=/bin/sleep 10
+ExecStart=/home/fishsensetx2/run_firmware.sh
 
 [Install]
 WantedBy=multi-user.target

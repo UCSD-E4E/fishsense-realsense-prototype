@@ -6,7 +6,7 @@ After=multi-user.target
 Type=idle
 User=root
 ExecStartPre=/bin/sleep 10
-ExecStart=/home/fishsensetx2/run_firmware.sh
+ExecStart=/usr/bin/run_fs_firmware.sh
 
 [Install]
 WantedBy=multi-user.target

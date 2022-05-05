@@ -49,14 +49,14 @@ int main(int argc, char* argv[]) try
 
     int run_index = 0;
     fstream runfile;
-    runfile.open("/home/fishsensetx2/run.txt");
+    runfile.open("/usr/local/share/FishSense/run.txt");
     runfile>>run_index;
     runfile.close();
     run_index++;
     std::stringstream dirprefix;
-    dirprefix << "/media/fishsensetx2/Extreme SSD/run" << run_index << "/";
+    dirprefix << "/mnt/data" << run_index << "/";
     std::ofstream ofs;
-    ofs.open("/home/fishsensetx2/run.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.open("/usr/local/share/FishSense/run.txt", std::ofstream::out | std::ofstream::trunc);
     ofs << run_index;
     ofs.close();
     int check;
@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) try
     }
 
     //We should never reach here
-    system("sudo poweroff");
+    system("reboot");
     return EXIT_SUCCESS;
 }
 catch (const rs2::error& e)

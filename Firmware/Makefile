@@ -1,4 +1,4 @@
-rs_save:
+rs_save: rs_save.cpp
 	g++ rs_save.cpp -o rs_save -lrealsense2
 .phony: install
 

@@ -110,9 +110,12 @@ int main(int argc, char* argv[]) try
                 //We are having fun and saving the bag, all is well in the world
                 //Fun is continuing to be had
                 if(exec("cat /sys/class/gpio/gpio388/value") == "0\n") { //If we see a magnetic signal again
-                    system("echo 1 > /sys/class/gpio/gpio298/value"); //Turn off REC LED
                     rec_flag = false;
                     pipe.stop(); //This should save the bag file
+                    system("sync");
+                    system("sync");
+                    system("sync");
+                    system("echo 1 > /sys/class/gpio/gpio298/value"); //Turn off REC LED
                     //Prep the potential next bag file
                     bag_index++;
                     std::stringstream bag_location_new;
@@ -121,9 +124,6 @@ int main(int argc, char* argv[]) try
                     std::this_thread::sleep_for(std::chrono::milliseconds(2000)); //Don't want to catch multiple magnetic switches
                 }
             }
-            system("sync");
-            system("sync");
-            system("sync");
         }
         
         std::this_thread::sleep_for(std::chrono::milliseconds(10));

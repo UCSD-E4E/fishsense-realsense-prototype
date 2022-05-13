@@ -111,7 +111,9 @@ int main(int argc, char* argv[]) try
                 //Fun is continuing to be had
                 if(exec("cat /sys/class/gpio/gpio388/value") == "0\n") { //If we see a magnetic signal again
                     rec_flag = false;
+                    system("echo 1 > /sys/class/gpio/gpio298/value"); //Turn off REC LED
                     pipe.stop(); //This should save the bag file
+                    system("echo 0 > /sys/class/gpio/gpio298/value"); //Turn off REC LED
                     system("sync");
                     system("sync");
                     system("sync");

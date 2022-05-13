@@ -118,6 +118,10 @@ int main(int argc, char* argv[]) try
                     system("sync");
                     system("sync");
                     system("echo 1 > /sys/class/gpio/gpio298/value"); //Turn off REC LED
+                    system("umount /mnt/data");
+                    system("echo 0 > /sys/class/gpio/gpio298/value"); //Turn off REC LED
+                    system("mount /mnt/data");
+                    system("echo 1 > /sys/class/gpio/gpio298/value"); //Turn off REC LED
                     //Prep the potential next bag file
                     bag_index++;
                     std::stringstream bag_location_new;

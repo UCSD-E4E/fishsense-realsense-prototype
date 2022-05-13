@@ -103,7 +103,7 @@ int main(int argc, char* argv[]) try
                 rec_flag=true;
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
                 pipe.start(cfg); //bag file should be saving at this point!
-		cout << "saved bag to " << bag_location.str() << endl;
+		        cout << "saved bag to " << bag_location.str() << endl;
             }
 
             while(rec_flag) {
@@ -121,6 +121,9 @@ int main(int argc, char* argv[]) try
                     std::this_thread::sleep_for(std::chrono::milliseconds(2000)); //Don't want to catch multiple magnetic switches
                 }
             }
+            system("sync");
+            system("sync");
+            system("sync");
         }
         
         std::this_thread::sleep_for(std::chrono::milliseconds(10));

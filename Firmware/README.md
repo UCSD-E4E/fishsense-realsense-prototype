@@ -26,8 +26,8 @@
     4. No wifi
 13. Once the Jetson has booted to the desktop, open a terminal and execute the following commands:
     1. `sudo apt-get update`
-    2. `sudo apt-get install -f`
-    3. `sudo apt-get `upgrade
+    2. `sudo apt-get install -y -f`
+    3. `sudo apt-get upgrade`
     4. `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE`
     5. `sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u`
     6. `sudo apt-get install -y tmux git vim htop glances build-essential librealsense2-utils librealsense2-dev librealsense2-dbg`

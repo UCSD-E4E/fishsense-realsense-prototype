@@ -1,3 +1,4 @@
+//scott test edit
 #include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
 
 #include <fstream>              // File IO
